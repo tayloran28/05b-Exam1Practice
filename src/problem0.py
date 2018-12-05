@@ -207,6 +207,11 @@ def problem0a(n):
     #        ASK FOR HELP if you do not understand this hint.
     # -------------------------------------------------------------------------
 
+    sum = sum_of_digits(n)
+    if sum % 2 == 0:
+        return False
+    else:
+        return True
 
 def run_test_problem0b():
     """ Tests the   problem0b   function. """
@@ -262,7 +267,7 @@ def problem0b(n):
            since there are 46 primes between 2 and 200.
      """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -272,6 +277,11 @@ def problem0b(n):
     ###########################################################################
     # ------------------------------------------------------------------
 
+    count = 0
+    for k in range(n-1):
+        if is_prime(k + 2):
+            count = count + 1
+    return count
 
 def run_test_problem0c():
     """ Tests the   problem0c  function. """
@@ -330,7 +340,7 @@ def problem0c(circle, n, window):
       :type window: rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -339,6 +349,13 @@ def problem0c(circle, n, window):
     ###########################################################################
     # -------------------------------------------------------------------------
 
+    circle.attach_to(window)
+    x_val = circle.center.x + (circle.radius * 2)
+    for _ in range(n):
+        new_circle = rg.Circle(rg.Point(x_val, circle.center.y), circle.radius)
+        new_circle.attach_to(window)
+        x_val = x_val + (circle.radius * 2)
+        window.render(0.5)
 
 ###############################################################################
 # Our tests use the following to print error messages in red.
@@ -359,6 +376,7 @@ def print_actual_result_of_test(expected, actual, test_results,
 
 def print_summary_of_test_results(test_results):
     testing_helper.print_summary_of_test_results(test_results)
+
 
 
 # To allow color-coding the output to the console:
