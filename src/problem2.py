@@ -31,7 +31,7 @@ import rosegraphics as rg
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_problem2a()
+   # run_test_problem2a()
     run_test_problem2b()
 
 
@@ -103,7 +103,7 @@ def problem2a(circle, rectangle, window):
       :type window:    rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     # -------------------------------------------------------------------------
     # -------------------------------------------------------------------------
@@ -115,9 +115,19 @@ def problem2a(circle, rectangle, window):
     # window already called, circle center point called
 
     circle.attach_to(window)
-
     rectangle.attach_to(window)
+    window.render()
+    window.continue_on_mouse_click()
 
+    line = rg.Line(rectangle.get_upper_right_corner(), rectangle.get_lower_left_corner())
+    line.arrow = 'last'
+    line.attach_to(window)
+    window.render()
+    window.continue_on_mouse_click()
+
+    circle.fill_color = rectangle.outline_color
+    circle.attach_to(window)
+    window.render()
 
 def run_test_problem2b():
     """ Tests the  problem2b   function. """
@@ -190,6 +200,20 @@ def problem2b(rect, n, delta, win):
     #    TIME ESTIMATE:   15 to 25 minutes.
     # -------------------------------------------------------------------------
 
+    rect.attach_to(win)
+    win.render()
+
+    for k in range(n-1):
+        w = rect.get_width() + delta
+        h = rect.get_height() + delta
+
+        corner1 = rg.Point(rect.get_upper_right_corner().x + (w - rect.get_width()), rect.get_upper_right_corner().y - (h - rect.get_height()))
+
+        corner2 = rg.Point(rect.get_lower_left_corner().x - (w - rect.get_width()), rect.get_lower_left_corner().y + (h - rect.get_height()))
+
+        rect = rg.Rectangle(corner1, corner2)
+        rect.attach_to(win)
+    win.render()
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
